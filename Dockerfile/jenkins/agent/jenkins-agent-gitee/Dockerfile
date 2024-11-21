@@ -2,7 +2,7 @@ From hub.oepkgs.net/oepkgs/openeuler-base:openEuler-24.03-LTS-riscv64
 
 
 RUN set -eux; \
-    yum install -y python3-pip cpio bsdtar expect openssh sudo vim git strace python-jenkins python3-requests python-concurrent-log-handler python3-gevent python3-marshmallow python3-pyyaml python-pandas python-xlrd python-retrying python-esdk-obs-python git java-11-openjdk 
+    yum install -y python3-pip cpio bsdtar expect openssh sudo vim git strace python-jenkins python3-requests python-concurrent-log-handler python3-gevent python3-marshmallow python3-pyyaml python-pandas python-xlrd python-retrying python-esdk-obs-python git java-11-openjdk dumb-init
 RUN ln -s /usr/lib/jvm/java-11-openjdk-11.0.23.9-1.oe2403.riscv64/bin/java /usr/local/openjdk-11
 
 ARG VERSION=4.3
