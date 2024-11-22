@@ -2,7 +2,7 @@ From hub.oepkgs.net/oepkgs/openeuler-base:openEuler-24.03-LTS-riscv64
 
 
 RUN set -eux; \
-    yum install -y python3-pip cpio bsdtar expect openssh sudo vim git strace python-jenkins python3-requests python-concurrent-log-handler python3-gevent python3-marshmallow python3-pyyaml python-pandas python-xlrd python-retrying python-esdk-obs-python git java-17-openjdk java-17-openjdk-devel dumb-init
+    yum install -y python3-pip cpio bsdtar expect openssh sudo vim git strace python-jenkins python3-requests python-concurrent-log-handler python3-gevent python3-marshmallow python3-pyyaml python-pandas python-xlrd python-retrying python-esdk-obs-python git java-17-openjdk java-17-openjdk-devel dumb-init python-click python-xmltodict
 
 ARG VERSION=4.3
 ARG user=jenkins
