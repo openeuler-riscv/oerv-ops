@@ -2,7 +2,11 @@ From hub.oepkgs.net/oepkgs/openeuler-base:openEuler-24.03-LTS-riscv64
 
 
 RUN set -eux; \
-    yum install -y python3-pip cpio bsdtar expect openssh sudo vim git strace python-jenkins python3-requests python-concurrent-log-handler python3-gevent python3-marshmallow python3-pyyaml python-pandas python-xlrd python-retrying python-esdk-obs-python git java-17-openjdk java-17-openjdk-devel dumb-init python-click python-xmltodict python-colorlog
+    yum install -y python3-pip cpio bsdtar expect openssh sudo vim git strace python-jenkins python3-requests python-concurrent-log-handler python3-gevent python3-marshmallow python3-pyyaml python-pandas python-xlrd python-retrying python-esdk-obs-python git java-17-openjdk java-17-openjdk-devel dumb-init python-click python-xmltodict python-colorlog python3-pyrpm python3-PyMySQL gcc gcc-c++ lftp make ruby ruby-devel rubygems wget \
+    && yum clean all
+
+RUN wget https://eulermaker.compass-ci.openeuler.openatom.cn/api/ems1/repositories/openEuler-packaging/ccb-1.0-6.noarch.rpm \
+    && rpm -ivh ccb-1.0-6.noarch.rpm
 
 ARG VERSION=4.3
 ARG user=jenkins
