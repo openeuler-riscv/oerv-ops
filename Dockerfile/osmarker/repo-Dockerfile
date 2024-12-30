@@ -1,0 +1,5 @@
+FROM fedora:42
+
+RUN dnf makecache \
+    && dnf install -y rsync createrepo_c dnf-plugins-core \
+    && dnf clean all
