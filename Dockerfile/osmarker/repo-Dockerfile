@@ -1,5 +1,5 @@
 FROM fedora:42
 
 RUN dnf makecache \
-    && dnf install -y rsync createrepo_c dnf-plugins-core \
+    && dnf install -y rsync createrepo_c dnf-plugins-core 'dnf5-command(reposync)' \
     && dnf clean all
