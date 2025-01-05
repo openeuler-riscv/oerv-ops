@@ -1,4 +1,4 @@
-From hub.oepkgs.net/oepkgs/openeuler-base:openEuler-24.03-LTS-riscv64
+From  hub.oepkgs.net/oerv-ci/openeuler-24.03-lts-sp1-riscv64:latest
 
 ARG user=jenkins
 ARG group=jenkins
