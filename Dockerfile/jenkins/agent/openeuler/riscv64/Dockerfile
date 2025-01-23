@@ -1,4 +1,4 @@
-From  hub.oepkgs.net/oerv-ci/openeuler-24.03-lts-sp1-riscv64:latest
+FROM  hub.oepkgs.net/oerv-ci/openeuler-24.03-lts-sp1-riscv64:latest
 
 ARG user=jenkins
 ARG group=jenkins
@@ -8,6 +8,8 @@ ARG JENKINS_AGENT_HOME=/home/${user}
 
 ENV JENKINS_AGENT_HOME ${JENKINS_AGENT_HOME}
 
+# set mirror yum repo
+RUN sed -i /etc/yum.repos.d/openEuler.repo -e "s@repo.openeuler.org@mirrors.huaweicloud.com/openeuler@g" 
 
 # setup SSH server
 RUN dnf makecache \
