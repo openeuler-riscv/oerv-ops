@@ -21,6 +21,7 @@
 |需求|完成状态|
 |---|---|
 |仓库的**PR**要自动触发**LAVA**内核测试，并回复结果至**PR**下|**done**|
+|**/check**添加参数功能|**to do**|
 |仓库的**ISSUE**里要能触发**LAVA**内核测试，并回复结果至**ISSUE**里|**to do**|
 
 ## 实现
@@ -32,8 +33,37 @@ PR/issue -> webhook -> jenkins job -> 分析 issue:/check sg2042 commitid , PR�
 * 识别 ISSUE comments、PR回复中的 /check
 * 有PR时就会回复开始测试。并返回结果
 * 获取PR的id并向kernel-build传递
-* 获取PR的url并像kernel-build传递
+* 获取PR的url并向kernel-build传递
 * 获取需要回复信息的URL
+* 获取 /check 的参数 lava_template、testcase_url、testcase，并传递给rvck-lava-trigger
+
+###### /check
+指令模板：   
+``` 
+/check  lava模板文件路径  lava测试用例路径  测试用例的参数(ltp测试时，参数为all，设置为空，效果为执行全部ltp测试)  
+/check ${lava_template} ${testcase_url} ${testcase}
+
+Example:
+/check lava-job-template/qemu/qemu-ltp.yaml lava-testcases/common/ltp/ltp.yaml math 
+
+/check lava-job-template/qemu/qemu-ltp.yaml lava-testcases/common/ltp/ltp.yaml all
+```
+> **lava模板文件路径**、**lava测试用例路径**、**测试用例的参数**从[RAVA项目](https://github.com/RVCK-Project/lavaci)获取
+##### rvck/rvck-lava-trigger
+* 获取 kernel-build 传递的变量
+
+|变量名|作用|
+|---|---|
+|kernel_download_url|内核下载链接|
+|rootfs_download_url|rootfs下载链接|
+|REPO|指定所属仓库, 用于gh ... -R "$REPO"|
+|ISSUE_ID|需要评论的issue pr id|
+|testcase_url|需要执行的用例yaml 文件路径 |
+|testcase|ltp测试时，指定测试套|
+|lava_template|lava模板文件路径|
+* 检查**testcase_url**、**lava_template**文件是否存在
+* 对**lava_template**文件里的变量进行替换
+* 触发**lava**测试后，等待并返回**lava**结果至**gh_actions**
 
 ### webhook设置
 |webhook events|
@@ -56,5 +86,5 @@ PR/issue -> webhook -> jenkins job -> 分析 issue:/check sg2042 commitid , PR�
 |riscv64|hub.oepkgs.net/oerv-ci/jenkins-sshagent:latest|
 
 #### 注意事项
-    Docker Compose v1切换到Docker Compose v2 ,需使用 docker compose 启动：
+> Docker Compose v1切换到Docker Compose v2 ,需使用 docker compose 启动：
         https://docs.docker.com/compose/install/linux/#install-the-plugin-manually
