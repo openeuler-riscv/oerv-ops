@@ -1,7 +1,7 @@
 FROM hub.oepkgs.net/oerv-ci/openeuler-24.03-lts-sp1-riscv64:latest
 
 RUN set -eux; \
-    yum install -y python3-pip cpio bsdtar expect openssh sudo vim git strace python-jenkins python3-requests python-concurrent-log-handler python3-gevent python3-marshmallow python3-pyyaml python-pandas python-xlrd python-retrying python-esdk-obs-python git java-11-openjdk java-11-openjdk-devel dumb-init python-click python-xmltodict \
+    yum install -y python3-pip cpio bsdtar expect openssh sudo vim git strace python-jenkins python3-requests python-concurrent-log-handler python3-gevent python3-marshmallow python3-pyyaml python-pandas python-xlrd python-retrying python-esdk-obs-python git java-17-openjdk java-17-openjdk-devel dumb-init python-click python-xmltodict \
     python-colorlog python3-pyrpm python3-PyMySQL gcc gcc-c++ lftp make ruby ruby-devel rubygems wget libabigail python3-prettytable python3-unversioned-command\
     && yum clean all
 
@@ -38,7 +38,7 @@ RUN chmod 0644 /var/lib/rpm/Index.db \
 COPY ./super_publish_rsa /root/.ssh/super_publish_rsa
 
 USER ${user}
-ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk/
+ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk/
 ENV AGENT_WORKDIR=${AGENT_WORKDIR}
 RUN mkdir /home/${user}/.jenkins && mkdir -p ${AGENT_WORKDIR}
 
